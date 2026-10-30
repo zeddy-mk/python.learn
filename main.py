@@ -52,3 +52,31 @@ for product in products:
     if cleaned_name != "" and price > 0:
         new_products.append(product)
 print(f"Valid products: {new_products}")
+
+
+
+#COMAPARISON
+
+customers = [
+
+    {"name": "John", "email": "john@gmail.com"},
+    {"name": "Mary", "email": ""},
+    {"name": "Peter", "email": "None"},
+    {"name": "Anna", "email": "anna@gmail.com"},
+    {"name": "James", "email": ""}
+]
+
+valid_customers = []
+
+for customer in customers:
+    email = (customer["email"] or "").strip()
+    is_valid = bool(email) and email.lower() != "none"
+
+    print(f"{customer['name']}: {is_valid}")  # Boolean output
+
+    if is_valid:
+        valid_customers.append(customer)
+
+print(f"Number of valid emails: {len(valid_customers)}")
+ 
+        
