@@ -77,7 +77,7 @@ for customer in customers:
     if is_valid:
         valid_customers.append(customer)
 
-#print(f"Number of valid emails: {len(valid_customers)}")
+print(f"Number of valid emails: {len(valid_customers)}")
 
 employees = [
     {"name": "John", "Salary": 1500000},
@@ -87,15 +87,23 @@ employees = [
     {"name": "James", "Salary": 300000}
 ]
 
-for empolyee in employees:
-    if empolyee["Salary"] > 1000000:
-        print(f"{empolyee['name']} Status: High Performer")
-        if empolyee["Salary"] == 500000:
-            print(f"{empolyee['name']} Status: Target Achieved")
-            if empolyee["Salary"] < 500000:
-                print(f"{empolyee['name']} Status: Lower Performer") 
+employee_statuses = []
+
+for employee in employees:
+    salary = employee["Salary"]
+
+    if salary > 1_000_000:
+        status = "High Performer"
+    elif salary == 500_000:
+        status = "Target Achieved"
+    elif salary < 500_000:
+        status = "Lower Performer"
     else:
-        print(f"{empolyee['name']} Status: Average Performer")
+        status = "Average Performer"
+
+    employee_statuses.append(f"{employee['name']} Status: {status}")
+
+print(employee_statuses)
 
 
 
@@ -107,12 +115,12 @@ payments = [
     {"customer": "James", "amount": 100000}
 ]
 valid_numeric_amounts = 0
+payment_results = []
 for payment in payments:
-    if isinstance(payment["amount"], (int, float)):
-        valid_numeric_amounts += 1
-        print(f"{payment['customer']} Payment: Valid")
-    else:
-        print(f"{payment['customer']} Payment: Invalid")
+    status = "Valid" if isinstance(payment["amount"], (int, float)) else "Invalid"
+    payment_results.append(f"{payment['customer']} Payment: {status}")
+
+print(payment_results)
 
 print(f"Number of records with valid numeric amounts: {valid_numeric_amounts}")
 
