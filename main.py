@@ -12,8 +12,8 @@ total_payroll = 0
 for employee in employees:
     new_salary.append(employee["Salary"] + employee["bonus"])
     total_payroll += new_salary[-1]
-    print(f"New salary for {employee['name']}: {new_salary[-1]}")
-print(f"Total payroll: {total_payroll}")
+    #print(f"New salary for {employee['name']}: {new_salary[-1]}")
+#print(f"Total payroll: {total_payroll}")
 
 #data extraction
 inventory = [
@@ -30,8 +30,8 @@ for product in inventory:
     if product["quantity"] <= 5:
         restock_list.append(product)
 
-print(f"Products that need restock: {restock_list}")
-print(f"Number of products: {len(restock_list)}")
+#print(f"Products that need restock: {restock_list}")
+#print(f"Number of products: {len(restock_list)}")
 
 
 #data cleaning
@@ -51,7 +51,7 @@ for product in products:
 
     if cleaned_name != "" and price > 0:
         new_products.append(product)
-print(f"Valid products: {new_products}")
+#print(f"Valid products: {new_products}")
 
 
 
@@ -77,6 +77,43 @@ for customer in customers:
     if is_valid:
         valid_customers.append(customer)
 
-print(f"Number of valid emails: {len(valid_customers)}")
+#print(f"Number of valid emails: {len(valid_customers)}")
  
-        
+
+
+
+      #PYTHON LOGIC OPERATORS 
+
+# Check if a user's name is not empty and the age is greater than or equal to 18
+user_name = "Alice"
+user_age = 20
+is_adult = 18
+
+valid_user = user_name != "" and user_age >= is_adult
+print(f"Is the user valid: {valid_user}")
+
+
+#Check if the password is at least 8 characters long and does not contain spaces
+password = " mypassword"
+valid_pasword = len(password) >= 8 and " " not in password
+print(f"Is the password valid: {valid_pasword}")
+
+
+# Check if a user's email is not  empty, contains '@', and ends with '.com'
+user_email = "mk@gmail.om"
+valid_email = user_email != "" and "@" in user_email and user_email.endswith(".com")
+print(f"Is the email valid: {valid_email}")
+
+
+# Check if username is a string, is not None, and is longer the 5 characters
+user_name = "John"
+valid_username = isinstance(user_name, str) and user_name is not None and len(user_name) > 5
+print(f"Is the username valid: {valid_username}")
+
+#Check if the user is either an admin or moderator, and either they're not banned or they've verified their email.
+user_role = "admin"
+user_role2 = "moderator"
+is_banned = False
+email_verified = True
+valid_user_role = (user_role == "admin" or user_role2 == "moderator") and (not is_banned or email_verified)
+print(f"Is the user role valid: {valid_user_role}")
