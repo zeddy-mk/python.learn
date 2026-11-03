@@ -161,3 +161,32 @@ is_banned = False
 email_verified = True
 valid_user_role = (user_role == "admin" or user_role2 == "moderator") and (not is_banned or email_verified)
 print(f"Is the user role valid: {valid_user_role}")
+
+
+
+
+
+
+                         #IF, ELIF, ELSE STATEMENTS#
+
+# 1.Validate the quality and correctness of Email values.
+# Must not be empty
+# Must contain '@' and '.'
+# Must contain exactly one '@' symbol
+# Must end with 'com', '.org', or 'net'
+# Must not be longer than 254 characters
+# Must start and end with a letter or digit
+
+
+
+
+
+
+# 2.Validate the quality and correctness of Password values.
+# Must not be empty
+# Must be at least 8 characters long
+# Must include at least 1 uppercase
+# Must include at least 1 lowercase
+# Must not be the same as the email
+# Must not contain any spaces
+# Must start and end with a letter or digit
