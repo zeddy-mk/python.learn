@@ -77,7 +77,7 @@ for customer in customers:
     if is_valid:
         valid_customers.append(customer)
 
-print(f"Number of valid emails: {len(valid_customers)}")
+#print(f"Number of valid emails: {len(valid_customers)}")
 
 employees = [
     {"name": "John", "Salary": 1500000},
@@ -120,9 +120,9 @@ for payment in payments:
     status = "Valid" if isinstance(payment["amount"], (int, float)) else "Invalid"
     payment_results.append(f"{payment['customer']} Payment: {status}")
 
-print(payment_results)
+#print(payment_results)
 
-print(f"Number of records with valid numeric amounts: {valid_numeric_amounts}")
+#print(f"Number of records with valid numeric amounts: {valid_numeric_amounts}")
 
 
 
@@ -134,25 +134,25 @@ user_age = 20
 is_adult = 18
 
 valid_user = user_name != "" and user_age >= is_adult
-print(f"Is the user valid: {valid_user}")
+#print(f"Is the user valid: {valid_user}")
 
 
 #Check if the password is at least 8 characters long and does not contain spaces
 password = " mypassword"
 valid_pasword = len(password) >= 8 and " " not in password
-print(f"Is the password valid: {valid_pasword}")
+#print(f"Is the password valid: {valid_pasword}")
 
 
 # Check if a user's email is not  empty, contains '@', and ends with '.com'
 user_email = "mk@gmail.om"
 valid_email = user_email != "" and "@" in user_email and user_email.endswith(".com")
-print(f"Is the email valid: {valid_email}")
+#print(f"Is the email valid: {valid_email}")
 
 
 # Check if username is a string, is not None, and is longer the 5 characters
 user_name = "John"
 valid_username = isinstance(user_name, str) and user_name is not None and len(user_name) > 5
-print(f"Is the username valid: {valid_username}")
+#print(f"Is the username valid: {valid_username}")
 
 #Check if the user is either an admin or moderator, and either they're not banned or they've verified their email.
 user_role = "admin"
@@ -160,7 +160,7 @@ user_role2 = "moderator"
 is_banned = False
 email_verified = True
 valid_user_role = (user_role == "admin" or user_role2 == "moderator") and (not is_banned or email_verified)
-print(f"Is the user role valid: {valid_user_role}")
+#print(f"Is the user role valid: {valid_user_role}")
 
 
 
@@ -177,6 +177,30 @@ print(f"Is the user role valid: {valid_user_role}")
 # Must not be longer than 254 characters
 # Must start and end with a letter or digit
 
+email = "id.2@.net"
+if email == "":
+    print("Email must not be Empty!")
+
+elif not('.' in email and '@' in email):
+    print("Email must contain . and @")
+
+elif email.count('@') != 1:
+    print("Email must contain one @ symbol")
+
+elif not email.endswith(('.com', '.org', '.net')):
+    print("Email must end with .com, .org, or .net")
+
+elif len(email) > 254:
+    print("Email must not be longer than 254 characters")
+
+elif not (email[0].isalnum() and email[-1].isalnum()):
+    print("Email must start and end with a letter or digit")
+
+else:
+    print("Email is Valid")
+
+
+
 
 
 
@@ -190,3 +214,30 @@ print(f"Is the user role valid: {valid_user_role}")
 # Must not be the same as the email
 # Must not contain any spaces
 # Must start and end with a letter or digit
+
+password = "i@.nSSDAEt"
+email = "id.2@.net"
+
+if password == "":
+    print("Password must not be Empty!")
+
+elif len(password) < 8:
+    print("Password must be at least 8 characters long")
+
+elif not any(character.isupper() for character in password):
+    print("Password must include at least 1 uppercase letter")
+
+elif not any(character.islower() for character in password):
+    print("Password must include at least 1 lowercase letter")
+
+elif password == email:
+    print("Password must not be the same as the email")
+
+elif password.count(" ") > 0:
+    print("Password must not contain any spaces")
+
+elif not (password[0].isalnum() and password[-1].isalnum()):
+    print("Password must start and end with a letter or digit")
+
+else:
+    print("Password is Valid")
