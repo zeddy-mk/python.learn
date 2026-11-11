@@ -249,29 +249,36 @@ else:
     #task one
 
 employees = [
-    {"name": "John", "salary": 1500000, "score": 95, "bonus": 20},
-    {"name": "Mary", "salary": 800000, "score": 70, "bonus": 15},
-    {"name": "Peter", "salary": 500000, "score": 60, "bonus": 10},
-    {"name": "Anna", "salary": 2000000, "score": 97, "bonus": 25},
-    {"name": "James", "salary": 300000, "score": 59, "bonus": 0},
-    {"name": "David", "salary": 1200000, "score": 90, "bonus": 18},
-    {"name": "Sarah", "salary": 900000, "score": 75, "bonus": 12}
+    {"name": "John", "salary": 1500000, "score": 95, "bonus": 0.20},
+    {"name": "Mary", "salary": 800000, "score": 70, "bonus": 0.15},
+    {"name": "Peter", "salary": 500000, "score": 60, "bonus": 0.10},
+    {"name": "Anna", "salary": 2000000, "score": 97, "bonus": 0.25},
+    {"name": "James", "salary": 300000, "score": 59, "bonus": 0.00},
+    {"name": "David", "salary": 1200000, "score": 90, "bonus": 0.18},
+    {"name": "Sarah", "salary": 900000, "score": 75, "bonus": 0.12}
 ]
 
 print("Name | Score | Bonus | Final Salary")
 print("----------------------------------------")
 for employee in employees:
-    bonus = employee["salary"] * (employee["bonus"] / 100)
-    final_salary = employee["salary"] + bonus
-    print(f"{employee['name']} | {employee['score']} | {bonus} | {final_salary}")
-
-print(f"Total number of employees: {len(employees)}")
-total_bonus_paid = sum(employee["salary"] * (employee["bonus"] / 100) for employee in employees)
-print("----------------------------------------")
+    bonus_amount = employee['salary'] * employee['bonus']
+    final_salary = employee['salary'] + bonus_amount
+    if employee['score'] >= 90:
+        print(f"{employee['name']} | {employee['score']} | {bonus_amount} | {final_salary}")
+    elif employee['score'] >= 75:
+        print(f"{employee['name']} | {employee['score']} | {bonus_amount} | {final_salary}")
+    elif employee['score'] >=60:
+        print(f"{employee['name']} | {employee['score']} | {bonus_amount} | {final_salary}")
+    else:
+        print(f"{employee['name']} | {employee['score']} | {bonus_amount} | {final_salary}")
+print("-"*40)
+print(f"Number of employees: {len(employees)}")
+total_bonus_paid = sum(employee['salary'] * employee['bonus'] for employee in employees)
 print(f"Total bonus paid: {total_bonus_paid}")
+employee_with_highest_final_salary = max(employees, key=lambda x: x['salary'] + (x['salary'] * x['bonus']))
+print(f"Employee with highest final salary: {employee_with_highest_final_salary['name']}")
 
-employee_highest_salary = max(employees, key=lambda x: x["salary"])
-print(f"Employee with highest salary: {employee_highest_salary['name']}")
+
 
 
 
@@ -322,9 +329,9 @@ for product in products:
         "total": total,
     })
 
-print("\nCustomer Receipt")
-print("-" * 72)
-print(f"{'Item':<16}{'Qty':>5}{'Unit Price':>15}{'Subtotal':>15}{'Discount':>12}{'Total':>12}")
+#print("\nCustomer Receipt")
+#print("-" * 72)
+#print(f"{'Item':<16}{'Qty':>5}{'Unit Price':>15}{'Subtotal':>15}{'Discount':>12}{'Total':>12}")
 for item in receipt_items:
     print(
         f"{item['name']:<16}{item['quantity']:>5}"
@@ -336,8 +343,8 @@ subtotal = sum(item["subtotal"] for item in receipt_items)
 total_discount = sum(item["discount"] for item in receipt_items)
 final_amount = subtotal - total_discount
 
-print("-" * 72)
-print(f"Subtotal:       {subtotal:.2f}")
-print(f"Discount:      -{total_discount:.2f}")
-print(f"Final amount:   {final_amount:.2f}")
+#print("-" * 72)
+#print(f"Subtotal:       {subtotal:.2f}")
+#print(f"Discount:      -{total_discount:.2f}")
+#print(f"Final amount:   {final_amount:.2f}")
     
