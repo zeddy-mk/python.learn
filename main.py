@@ -273,10 +273,13 @@ for employee in employees:
         print(f"{employee['name']} | {employee['score']} | {bonus_amount} | {final_salary}")
 print("-"*40)
 print(f"Number of employees: {len(employees)}")
+print("-"*40)
 total_bonus_paid = sum(employee['salary'] * employee['bonus'] for employee in employees)
 print(f"Total bonus paid: {total_bonus_paid}")
+print("-"*40)
 employee_with_highest_final_salary = max(employees, key=lambda x: x['salary'] + (x['salary'] * x['bonus']))
 print(f"Employee with highest final salary: {employee_with_highest_final_salary['name']}")
+print("-"*40)
 
 
 
