@@ -248,38 +248,70 @@ else:
 
     #task one
 
+
 employees = [
-    {"name": "John", "salary": 1500000, "score": 95, "bonus": 0.20},
-    {"name": "Mary", "salary": 800000, "score": 70, "bonus": 0.15},
-    {"name": "Peter", "salary": 500000, "score": 60, "bonus": 0.10},
-    {"name": "Anna", "salary": 2000000, "score": 97, "bonus": 0.25},
-    {"name": "James", "salary": 300000, "score": 59, "bonus": 0.00},
-    {"name": "David", "salary": 1200000, "score": 90, "bonus": 0.18},
-    {"name": "Sarah", "salary": 900000, "score": 75, "bonus": 0.12}
+    {"name": "John", "salary": 1500000, "score": 95},
+    {"name": "Mary", "salary": 800000, "score": 70},
+    {"name": "Peter", "salary": 500000, "score": 60},
+    {"name": "Anna", "salary": 2000000, "score": 97},
+    {"name": "James", "salary": 300000, "score": 59},
+    {"name": "David", "salary": 1200000, "score": 90},
+    {"name": "Sarah", "salary": 900000, "score": 75}
 ]
 
 print("Name | Score | Bonus | Final Salary")
-print("----------------------------------------")
+print("-" * 55)
+
 for employee in employees:
-    bonus_amount = employee['salary'] * employee['bonus']
-    final_salary = employee['salary'] + bonus_amount
-    if employee['score'] >= 90:
-        print(f"{employee['name']} | {employee['score']} | {bonus_amount} | {final_salary}")
-    elif employee['score'] >= 75:
-        print(f"{employee['name']} | {employee['score']} | {bonus_amount} | {final_salary}")
-    elif employee['score'] >=60:
-        print(f"{employee['name']} | {employee['score']} | {bonus_amount} | {final_salary}")
+
+    # Determine bonus rate using performance score
+    if employee["score"] >= 90:
+        bonus_rate = 0.20
+    elif employee["score"] >= 75:
+        bonus_rate = 0.15
+    elif employee["score"] >= 60:
+        bonus_rate = 0.10
     else:
-        print(f"{employee['name']} | {employee['score']} | {bonus_amount} | {final_salary}")
-print("-"*40)
+        bonus_rate = 0.00
+
+    # Calculate bonus and final salary
+    bonus_amount = employee["salary"] * bonus_rate
+    final_salary = employee["salary"] + bonus_amount
+
+    # Store calculated values for later use
+    employee["bonus_amount"] = bonus_amount
+    employee["final_salary"] = final_salary
+
+    print(
+        f"{employee['name']:<10} | "
+        f"{employee['score']:<5} | "
+        f"{bonus_amount:,.2f} | "
+        f"{final_salary:,.2f}"
+    )
+
+print("-" * 55)
+
+# Total employees
 print(f"Number of employees: {len(employees)}")
-print("-"*40)
-total_bonus_paid = sum(employee['salary'] * employee['bonus'] for employee in employees)
-print(f"Total bonus paid: {total_bonus_paid}")
-print("-"*40)
-employee_with_highest_final_salary = max(employees, key=lambda x: x['salary'] + (x['salary'] * x['bonus']))
-print(f"Employee with highest final salary: {employee_with_highest_final_salary['name']}")
-print("-"*40)
+
+# Total bonuses
+total_bonus_paid = sum(
+    employee["bonus_amount"] for employee in employees
+)
+
+print(f"Total bonuses paid: TZS {total_bonus_paid:,.2f}")
+
+# Employee with highest final salary
+highest_employee = max(
+    employees,
+    key=lambda x: x["final_salary"]
+)
+
+print(
+    f"Highest paid employee: {highest_employee['name']} "
+    f"- TZS {highest_employee['final_salary']:,.2f}"
+)
+
 
 
 
@@ -287,6 +319,7 @@ print("-"*40)
 
 
   #2task two
+
 
 products = [
     {"name": "Rice", "price": 300000, "quantity": 25},
@@ -299,55 +332,102 @@ products = [
     {"name": "Tomato sauce", "price": 3500, "quantity": 0}
 ]
 
-receipt_items = []
+total_supermarket_sales = 0
+total_customers = 3
 
-for product in products:
-    requested_quantity = int(input(f"How many {product['name']} would you like to buy? "))
+for customer in range(1, total_customers + 1):
 
-    if requested_quantity > product["quantity"]:
-        print(f"Purchase rejected: only {product['quantity']} {product['name']} available.")
-        continue
-    elif requested_quantity <= 0:
-        print("Please enter a quantity greater than 0.")
-        continue
+    print(f"\nCUSTOMER {customer}")
+    print("-" * 50)
 
-    if product["price"] >= 200000:
-        discount_rate = 15
-    elif product["price"] >= 100000:
-        discount_rate = 10
-    elif product["price"] >= 50000:
-        discount_rate = 5
-    else:
-        discount_rate = 0
+    receipt_items = []
 
-    subtotal = product["price"] * requested_quantity
-    discount = subtotal * (discount_rate / 100)
-    total = subtotal - discount
-    receipt_items.append({
-        "name": product["name"],
-        "quantity": requested_quantity,
-        "unit_price": product["price"],
-        "subtotal": subtotal,
-        "discount": discount,
-        "total": total,
-    })
+    # Process customer purchases
+    for product in products:
 
-#print("\nCustomer Receipt")
-#print("-" * 72)
-#print(f"{'Item':<16}{'Qty':>5}{'Unit Price':>15}{'Subtotal':>15}{'Discount':>12}{'Total':>12}")
-for item in receipt_items:
+        requested_quantity = int(
+            input(f"How many {product['name']} would you like to buy? ")
+        )
+
+        if requested_quantity <= 0:
+            print("Please enter a quantity greater than 0.")
+            continue
+
+        if requested_quantity > product["quantity"]:
+            print(
+                f"Purchase rejected: Only "
+                f"{product['quantity']} available."
+            )
+            continue
+
+        # Calculate purchase subtotal
+        subtotal = product["price"] * requested_quantity
+
+        # Determine discount based on subtotal
+        if subtotal >= 200000:
+            discount_rate = 0.15
+        elif subtotal >= 100000:
+            discount_rate = 0.10
+        elif subtotal >= 50000:
+            discount_rate = 0.05
+        else:
+            discount_rate = 0.00
+
+        # Calculate discount and final amount
+        discount = subtotal * discount_rate
+        final_amount = subtotal - discount
+
+        # Update available stock
+        product["quantity"] -= requested_quantity
+
+        # Save purchase information
+        receipt_items.append({
+            "name": product["name"],
+            "quantity": requested_quantity,
+            "unit_price": product["price"],
+            "subtotal": subtotal,
+            "discount": discount,
+            "total": final_amount
+        })
+
+    # Generate customer receipt
+    print("\nCUSTOMER RECEIPT")
+    print("-" * 75)
+
     print(
-        f"{item['name']:<16}{item['quantity']:>5}"
-        f"{item['unit_price']:>15.2f}{item['subtotal']:>15.2f}"
-        f"{item['discount']:>12.2f}{item['total']:>12.2f}"
+        f"{'Item':<18}{'Qty':>5}{'Price':>12}"
+        f"{'Subtotal':>14}{'Discount':>12}{'Total':>14}"
     )
 
-subtotal = sum(item["subtotal"] for item in receipt_items)
-total_discount = sum(item["discount"] for item in receipt_items)
-final_amount = subtotal - total_discount
+    customer_subtotal = sum(item["subtotal"] for item in receipt_items)
+    customer_discount = sum(item["discount"] for item in receipt_items)
+    customer_total = sum(item["total"] for item in receipt_items)
 
-#print("-" * 72)
-#print(f"Subtotal:       {subtotal:.2f}")
-#print(f"Discount:      -{total_discount:.2f}")
-#print(f"Final amount:   {final_amount:.2f}")
-    
+    for item in receipt_items:
+        print(
+            f"{item['name']:<18}"
+            f"{item['quantity']:>5}"
+            f"{item['unit_price']:>12,.0f}"
+            f"{item['subtotal']:>14,.0f}"
+            f"{item['discount']:>12,.0f}"
+            f"{item['total']:>14,.0f}"
+        )
+
+    print("-" * 75)
+    print(f"Subtotal: TZS {customer_subtotal:,.2f}")
+    print(f"Discount: TZS {customer_discount:,.2f}")
+    print(f"Final amount: TZS {customer_total:,.2f}")
+
+    total_supermarket_sales += customer_total
+
+# Supermarket summary
+print("\nSUPERMARKET DAILY SUMMARY")
+print("-" * 40)
+print(f"Customers served: {total_customers}")
+print(f"Total sales: TZS {total_supermarket_sales:,.2f}")
+
+print("\nREMAINING STOCK")
+print("-" * 40)
+
+for product in products:
+    print(f"{product['name']}: {product['quantity']} remaining")
