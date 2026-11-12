@@ -497,3 +497,8 @@ for transaction in transactions:
 
 
 
+
+
+
+                         #PYTHON FOR ELSE LOOPS
+                         #PYTHON NESTED LOOPS
