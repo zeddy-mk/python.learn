@@ -501,4 +501,59 @@ for transaction in transactions:
 
 
                          #PYTHON FOR ELSE LOOPS
+
+products = [
+    {"name": "Rice", "price": 3000, "quantity": 20},
+    {"name": "Sugar", "price": 2500, "quantity": 10},
+    {"name": "Beans", "price": 4000, "quantity": 5},
+    {"name": "Cooking Oil", "price": 6500, "quantity": 8},
+    {"name": "Flour", "price": 2000, "quantity": 15}
+]
+
+total_amount = 0
+
+for product in products:
+    requested_quantity = int(
+        input(f"How many {product['name']} would you like to buy? ")
+    )
+
+    if requested_quantity == 999:
+        print("Purchase cancelled by user.")
+        break
+
+    if requested_quantity <= 0:
+        print("Please enter a quantity greater than 0.")
+        continue
+
+    if requested_quantity > product["quantity"]:
+        print(
+            f"Purchase rejected: Only "
+            f"{product['quantity']} available."
+        )
+        continue
+
+    subtotal = product["price"] * requested_quantity
+    total_amount += subtotal
+    product["quantity"] -= requested_quantity
+    print(f"Subtotal for {product['name']}: TZS {subtotal:,.2f}")
+
+print(f"\nTotal for all valid purchases: TZS {total_amount:,.2f}")
+
+print("\nREMAINING STOCK")
+for product in products:
+    print(f"{product['name']}: {product['quantity']} remaining")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                          #PYTHON NESTED LOOPS
